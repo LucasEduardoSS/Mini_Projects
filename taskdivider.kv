@@ -2,25 +2,26 @@
 #:include menu_add_person.kv
 
 Main:
+    MenuScreenManager:
+        size_hint: None, 1
+        width: 300
+
+        MainMenu:
+        RegistersMenu:
+
     GridLayout:
-        cols: 2
-        size: root.width, root.height
+        pos: 300, 0
+        cols: 1
 
-        MenuScreenManager:
+        CustomLabel:
+            text: "As divisões aparecerão aqui"
+            color: 0, 0, 0
+
             size_hint: None, 1
-            width: 300
-
-            MainMenu:
-            RegistersMenu:
-
-        GridLayout:
-            cols: 1
-
-            CustomLabel:
-                text: "As divisões aparecerão aqui"
-                color: 0, 0, 0
-
-                background_color: 1, 1, 0, .2
+            size: root.width - 300, root.height
+            background_color: 1, 0, 0, .2
+    
+    MenuAddPerson:
 
 <MainMenu>:
     name: "main_menu"

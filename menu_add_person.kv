@@ -1,7 +1,30 @@
 <MenuAddPerson>:
-    FloatLayout:
-        size: root.width, root.height
+    CustomLayout:
+        opacity: root.menu_add_person_opacity
+        pos: 300, 0
 
-        Button:
-            size_hint: 1, 1
-            text: 'Hello'
+        canvas.before:
+            
+            Color:
+                rgba: 0, 0, 0, .7
+
+            Rectangle:
+                pos: self.pos
+                size: root.width, root.height
+
+        BoxLayout:
+            orientation:'vertical'
+            pos: root.width * .5 - self.width/2, root.height * .5 - self.height/2
+            padding: 10
+
+            Label:
+                text:'Nome: '
+            
+            TextInput:
+                id: 'input_nome'
+                text:'text'
+
+            Button:
+                text: 'Confirmar'
+    
+<CustomLayout@BoxLayout+Widget>

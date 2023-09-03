@@ -2,8 +2,10 @@ from kivy.app import App
 
 from kivy.core.window import Window
 from kivy.lang.builder import Builder
+from kivy.uix.relativelayout import RelativeLayout
 from kivy.uix.widget import Widget
-import layout
+from kivy.properties import NumericProperty
+from layout import *
 
 Window.clearcolor = (1, 1, 1, 1)
 Window.size = (1270, 720)
@@ -11,9 +13,15 @@ Window.minimum_width = 850
 Window.minimum_height = 500
 
 
-class Main(Widget):
-    pass
 
+
+class MenuAddPerson(Widget):
+    menu_add_person_opacity = menu_add_record_opacity
+
+
+class Main(RelativeLayout):
+    pass    
+        
 
 class TaskDividerApp(App):
     pass
