@@ -1,0 +1,93 @@
+#:include custom_rules.kv
+#:include menu_add_person.kv
+
+Main:
+    GridLayout:
+        MenuScreenManager:
+
+            size_hint: None, 1
+            width: 300
+
+            MainMenu:
+            RegistersMenu:
+
+        GridLayout:
+            cols: 1
+
+            CustomLabel:
+                text: "As divisões aparecerão aqui"
+                color: 0, 0, 0
+
+                background_color: 1, 1, 0, .2
+
+<MainMenu>:
+    name: "main_menu"
+
+    GridLayout:
+        cols: 1
+        size_hint: None, 1
+        width: 300
+        padding: 10
+        spacing: 5
+
+        CustomButton:
+            id: btn_dividirTarefas
+            text: "Dividir"
+            on_release:
+                root.divideTasks()
+
+        CustomButton:
+            id: btn_registros
+            text: "Registros"
+            on_release:
+                root.parent.current = "regs_menu"
+                root.manager.transition.direction = "left"
+                root.on_press_registros()
+
+        CustomButton:
+            id: btn_encerrar
+            text: "Encerrar"
+            background_color: 1, 0, 0, .7
+            on_release:
+                app.stop()
+
+        CustomLabel:
+            text: "Desenvolvido por Lucas Eduardo"
+            color: 0, 0, 0
+            text_size: self.width, self.height
+            font_size: 14
+
+            valign: 'bottom'
+            halign: 'center'
+            background_normal: ''
+            background_color: 1, 1, 1
+            size_hint_x: 1
+            padding_y: 30
+
+<RegistersMenu>
+    name: "regs_menu"
+
+    GridLayout:
+        cols: 1
+        size_hint: None, 1
+        width: 300
+        padding: 10
+        spacing: 5
+
+        CustomButton:
+            text: "Visualizar"
+
+        CustomButton:
+            text: "Alterar"
+
+        CustomButton:
+            text: "Adicionar ou Remover"
+            on_release:
+                root.add_person()
+
+        CustomButton:
+            text: "< Voltar"
+            background_color: 1, 1, 0, 0.5
+            on_release:
+                root.manager.transition.direction = 'right'
+                root.parent.current = "main_menu"

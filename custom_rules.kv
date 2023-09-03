@@ -1,0 +1,20 @@
+<BackgroundColor@Widget>
+    background_color: 1, 1, 1, 1
+    canvas.before:
+        Color:
+            rgba: root.background_color
+        Rectangle:
+            size: self.size
+            pos: self.pos
+
+<CustomLabel@Label+BackgroundColor>
+    background_color: 0, 0, 0, 0
+    font_name: 'fontes/Inconsolata/static/Inconsolata/Inconsolata-Regular.ttf'
+
+<CustomButton@Button>
+    size_hint: 1, None
+    height: 50
+    background_normal: ''
+    color: 0.20, 0.20, 0.20
+    background_color: 0.3, 0.75, 0.215, 0.75
+    font_name: 'fontes/OpenSans-Bold.ttf'

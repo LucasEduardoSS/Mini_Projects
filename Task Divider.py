@@ -1,48 +1,12 @@
 # Importa as bibliotecas
 from random import randint
 from time import sleep
-from numpy import sqrt
-
-
-def modulo(x):
-    return sqrt(x**2)
-
-
-def int_input():
-    while True:
-        try:
-            var = int(input("Digite aqui:"))
-            return var
-        except ValueError:
-            print("\33[31mValor inválido, tente novamente!\33[m")
-
-
-def titulo(mgs, tam):
-    print("-" * tam), print(f"{mgs:^{tam}}"), print("-" * tam)
-
-
-def tabela_registros(tipo, subtitulo=False):
-    if tipo == "P":
-        titulo("Pessoas Registradas", 50)
-        if subtitulo:
-            print(f'{"Cód":<5}{"Nome":<45}')
-        for pos, p in enumerate(pessoas):
-            print(f'{pos:<5}{p["Nome"]:<45}')
-        print("-" * 50)
-
-    elif tipo == "T":
-        titulo("Tarefas Registradas", 50)
-        if subtitulo:
-            print(f'{"Cód":<5}{"Nome":<40}{"Peso":<5}')
-        for pos, t in enumerate(tarefas):
-            print(f'{pos:<5}{t["Nome"]:<40}{t["Peso"]:<5}')
-        print("-" * 50)
-
+from functions import *
 
 tarefas = []  # Armazena as informações de tarefas
 pessoas = []  # Armazena temporariamente as informações de cada pessoa
 tarefas_atribuidas = []  # Registra quais tarefas ja foram atribuídas
-tarefas_analisadas = []  # Registra quais tarefas foram analizadas
+tarefas_analisadas = []  # Registra quais tarefas foram analisadas
 soma_pesos = (
     peso_medio
 ) = menor_dif = temp_tar_men_peso = count = temp_dif = temp_tar = o1_1 = o2_1 = 0
@@ -59,7 +23,7 @@ while True:
     1 - Dividir Tarefas
     0 - Encerrar o programa
     """
-    )  # Looby do Programa
+    )  # Lobby do Programa
 
     o1 = int(input("Digite aqui: "))
 
@@ -89,7 +53,7 @@ while True:
 
             # Imprime na tela as tarefas registradas
             print()
-            tabela_registros("T")
+            tabela_registros(pessoas, tarefas, "T")
             print()
 
             # Recebe e Registra a quantidade de pessoas
@@ -388,11 +352,14 @@ while True:
 
     # Visualiza os registros
     elif o1 == 5:
+        # Visualiza registros de tarefas
         print()
         print("-" * 50, f'\n{"Tarefas Registradas":^50}'), print("-" * 50)
         for t in tarefas:
             print(f'Nome: {t["Nome"]}; Peso: {t["Peso"]}')
         print("-" * 50)
+
+        # Visualiza registros de pessoas
         print()
         print("-" * 50, f'\n{"Pessoas Registradas":^50}'), print("-" * 50)
         for p in pessoas:
