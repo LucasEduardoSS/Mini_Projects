@@ -26,8 +26,7 @@ def tabela_registros(tbl_pessoas: list, tbl_registros: list, tipo, subtitulo=Fal
         if subtitulo:
             print(f'{"Cód":<5}{"Nome":<45}')
         for pos, p in enumerate(tbl_pessoas):
-            print(f'{pos:<5}{p["Nome"]:<45}')
-        print("-" * 50)
+            print(f'{pos:<5}{p["Nome"]:<45}{p["Cargo"]:>45}')
 
     # Imprime a tabela de registro de tarefas
     elif tipo == "T":
@@ -36,4 +35,5 @@ def tabela_registros(tbl_pessoas: list, tbl_registros: list, tipo, subtitulo=Fal
             print(f'{"Cód":<5}{"Nome":<40}{"Peso":<5}')
         for pos, t in enumerate(tbl_registros):
             print(f'{pos:<5}{t["Nome"]:<40}{t["Peso"]:<5}')
-        print("-" * 50)
+
+    print("-" * 50)

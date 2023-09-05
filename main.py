@@ -5,6 +5,7 @@ from kivy.lang.builder import Builder
 from kivy.uix.relativelayout import RelativeLayout
 from kivy.uix.widget import Widget
 from kivy.properties import NumericProperty
+
 from layout import *
 
 Window.clearcolor = (1, 1, 1, 1)

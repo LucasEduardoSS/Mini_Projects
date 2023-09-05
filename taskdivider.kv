@@ -10,6 +10,7 @@ Main:
         RecordsMenu:
         AddRecordMenu:
         RemoveRecordMenu:
+        ViewMenu:
 
     GridLayout:
         pos: 300, 0
@@ -82,6 +83,9 @@ Main:
 
         CustomButton:
             text: "Visualizar"
+            on_release:
+                root.manager.transition.direction = 'left'
+                root.parent.current = "view_menu"
 
         CustomButton:
             text: "Alterar"
@@ -151,6 +155,38 @@ Main:
             text: "Remover Tarefa"
             on_release:
                 root.remove_task()
+
+        CustomButton:
+            text: "< Voltar"
+            background_color: 1, 1, 0, 0.5
+            on_release:
+                root.manager.transition.direction = 'right'
+                root.parent.current = "regs_menu"
+
+<ViewMenu>
+    name: "view_menu"
+
+    GridLayout:
+        cols: 1
+        size_hint: None, 1
+        width: 300
+        padding: 10
+        spacing: 5
+
+        CustomButton:
+            text: "Visualizar Pessoas"
+            on_release:
+                root.view_people()
+        
+        CustomButton:
+            text: "Visualizar Tarefas"
+            on_release:
+                root.view_tasks()
+
+        CustomButton:
+            text: "Visualizar Tudo"
+            on_release:
+                root.view_all()
 
         CustomButton:
             text: "< Voltar"

@@ -1,4 +1,5 @@
 from kivy.uix.screenmanager import ScreenManager, Screen
+from data import *
 
 
 class MainMenu(Screen):
@@ -9,6 +10,27 @@ class MainMenu(Screen):
         pass
 
 
+class ViewMenu(Screen):
+    def view_people(self):
+        for person in people:
+            print(person)
+    
+    def view_tasks(self):
+        for task in tasks:
+            print(task)
+    
+    def view_all(self):
+        # Imprime as pessoas
+        print('Pessoas: ')
+        for person in people:
+            print(person)
+        
+        # Imprime as tarefas
+        print('Tarefas: ')
+        for task in tasks:
+            print(task)
+
+
 class RecordsMenu(Screen):
     def add_record(self):
         pass
@@ -16,10 +38,10 @@ class RecordsMenu(Screen):
 
 class AddRecordMenu(Screen):
     def add_person(self):
-        print('Adicionar pessoa')
+        people.append({'Nome': 'Lucas', 'Cargo': 'Programação'})
 
     def add_task(self):
-        print('Adicionar tarefa')
+        tasks.append({'Nome': 'Debugar Código', 'Peso': 5})
 
 
 class RemoveRecordMenu(Screen):
