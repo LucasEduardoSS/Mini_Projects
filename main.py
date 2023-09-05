@@ -13,10 +13,8 @@ Window.minimum_width = 850
 Window.minimum_height = 500
 
 
-
-
 class MenuAddPerson(Widget):
-    menu_add_person_opacity = menu_add_record_opacity
+    pass
 
 
 class Main(RelativeLayout):

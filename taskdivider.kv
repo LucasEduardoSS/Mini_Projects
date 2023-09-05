@@ -7,7 +7,9 @@ Main:
         width: 300
 
         MainMenu:
-        RegistersMenu:
+        RecordsMenu:
+        AddRecordMenu:
+        RemoveRecordMenu:
 
     GridLayout:
         pos: 300, 0
@@ -21,6 +23,7 @@ Main:
             size: root.width - 300, root.height
             background_color: 1, 0, 0, .2
     
+    # Esse menu não aparecerá
     MenuAddPerson:
 
 <MainMenu>:
@@ -45,7 +48,7 @@ Main:
             on_release:
                 root.parent.current = "regs_menu"
                 root.manager.transition.direction = "left"
-                root.on_press_registros()
+                root.on_press_records()
 
         CustomButton:
             id: btn_encerrar
@@ -67,7 +70,7 @@ Main:
             size_hint_x: 1
             padding_y: 30
 
-<RegistersMenu>
+<RecordsMenu>
     name: "regs_menu"
 
     GridLayout:
@@ -84,9 +87,16 @@ Main:
             text: "Alterar"
 
         CustomButton:
-            text: "Adicionar ou Remover"
+            text: "Adicionar"
             on_release:
-                root.add_person()
+                root.manager.transition.direction = 'left'
+                root.parent.current = "add_record_menu"
+        
+        CustomButton:
+            text: "Remover"
+            on_release:
+                root.manager.transition.direction = 'left'
+                root.parent.current = "remove_record_menu"
 
         CustomButton:
             text: "< Voltar"
@@ -94,3 +104,57 @@ Main:
             on_release:
                 root.manager.transition.direction = 'right'
                 root.parent.current = "main_menu"
+
+<AddRecordMenu>
+    name: "add_record_menu"
+
+    GridLayout:
+        cols: 1
+        size_hint: None, 1
+        width: 300
+        padding: 10
+        spacing: 5
+
+        CustomButton:
+            text: "Adicionar Pessoa"
+            on_release:
+                root.add_person()
+        
+        CustomButton:
+            text: "Adicionar Tarefa"
+            on_release:
+                root.add_task()
+
+        CustomButton:
+            text: "< Voltar"
+            background_color: 1, 1, 0, 0.5
+            on_release:
+                root.manager.transition.direction = 'right'
+                root.parent.current = "regs_menu"
+
+<RemoveRecordMenu>
+    name: "remove_record_menu"
+
+    GridLayout:
+        cols: 1
+        size_hint: None, 1
+        width: 300
+        padding: 10
+        spacing: 5
+
+        CustomButton:
+            text: "Remover Pessoa"
+            on_release:
+                root.remove_person()
+        
+        CustomButton:
+            text: "Remover Tarefa"
+            on_release:
+                root.remove_task()
+
+        CustomButton:
+            text: "< Voltar"
+            background_color: 1, 1, 0, 0.5
+            on_release:
+                root.manager.transition.direction = 'right'
+                root.parent.current = "regs_menu"
