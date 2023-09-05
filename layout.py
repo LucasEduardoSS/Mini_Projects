@@ -2,6 +2,7 @@ from kivy.uix.screenmanager import ScreenManager, Screen
 from data import *
 
 
+# Janela principal
 class MainMenu(Screen):
     def on_press_records(self):
         pass
@@ -9,7 +10,7 @@ class MainMenu(Screen):
     def divideTasks(self):
         pass
 
-
+# Janela de Visualização
 class ViewMenu(Screen):
     def view_people(self):
         for person in people:
@@ -31,11 +32,13 @@ class ViewMenu(Screen):
             print(task)
 
 
+# Janela de Registros
 class RecordsMenu(Screen):
     def add_record(self):
         pass
 
 
+# Janela de Adicionar Registro
 class AddRecordMenu(Screen):
     def add_person(self):
         people.append({'Nome': 'Lucas', 'Cargo': 'Programação'})
@@ -44,6 +47,7 @@ class AddRecordMenu(Screen):
         tasks.append({'Nome': 'Debugar Código', 'Peso': 5})
 
 
+# Janela de Adicionar Tarefa
 class RemoveRecordMenu(Screen):
     def remove_person(self):
         print('Remover pessoa')
@@ -52,5 +56,6 @@ class RemoveRecordMenu(Screen):
         print('Remvoer tarefa')
     
 
+# Gerenciador de Janelas
 class MenuScreenManager(ScreenManager):
     pass
