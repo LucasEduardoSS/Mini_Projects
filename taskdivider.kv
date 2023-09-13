@@ -9,7 +9,11 @@ Main:
         MainMenu:
         RecordsMenu:
         AddRecordMenu:
+        AddPersonMenu:
+        AddTaskMenu:
         RemoveRecordMenu:
+        RemovePersonMenu:
+        RemoveTaskMenu:
         ViewMenu:
 
     GridLayout:
@@ -39,7 +43,7 @@ Main:
 
         CustomButton:
             id: btn_dividirTarefas
-            text: "Dividir"
+            text: "Dividir *"
             on_release:
                 root.divideTasks()
 
@@ -88,7 +92,7 @@ Main:
                 root.parent.current = "view_menu"
 
         CustomButton:
-            text: "Alterar"
+            text: "Alterar *"
 
         CustomButton:
             text: "Adicionar"
@@ -97,7 +101,7 @@ Main:
                 root.parent.current = "add_record_menu"
         
         CustomButton:
-            text: "Remover"
+            text: "Remover *"
             on_release:
                 root.manager.transition.direction = 'left'
                 root.parent.current = "remove_record_menu"
@@ -122,12 +126,14 @@ Main:
         CustomButton:
             text: "Adicionar Pessoa"
             on_release:
-                root.add_person()
+                root.manager.transition.direction = 'left'
+                root.parent.current = "add_person_menu"
         
         CustomButton:
             text: "Adicionar Tarefa"
             on_release:
-                root.add_task()
+                root.manager.transition.direction = 'left'
+                root.parent.current = "add_task_menu"
 
         CustomButton:
             text: "< Voltar"
@@ -135,6 +141,78 @@ Main:
             on_release:
                 root.manager.transition.direction = 'right'
                 root.parent.current = "regs_menu"
+
+<AddPersonMenu>
+    name: "add_person_menu"
+
+    GridLayout:
+        cols: 1
+        size_hint: None, 1
+        width: 300
+        padding: 10
+        spacing: 5
+
+        CustomLabel2:
+            text: 'Nome'
+        
+        CustomTextInput:
+            id: nome_value  # A id não pode ser uma string
+            text:''
+
+        CustomLabel2:
+            text: 'Cargo'
+        
+        CustomTextInput:
+            id: cargo_value  # A id não pode ser uma string
+            text:''
+
+        CustomButton:
+            text: "Confirmar"
+            on_release:
+                root.add_person(nome_value.text, cargo_value.text)
+
+        CustomButton:
+            text: "< Voltar"
+            background_color: 1, 1, 0, 0.5
+            on_release:
+                root.manager.transition.direction = 'right'
+                root.parent.current = "add_record_menu"
+
+<AddTaskMenu>
+    name: "add_task_menu"
+
+    GridLayout:
+        cols: 1
+        size_hint: None, 1
+        width: 300
+        padding: 10
+        spacing: 5
+
+        CustomLabel2:
+            text: 'Nome'
+        
+        CustomTextInput:
+            id: nome_value  # A id não pode ser uma string
+            text:''
+
+        CustomLabel2:
+            text: 'Peso'
+        
+        CustomTextInput:
+            id: peso_value  # A id não pode ser uma string
+            text:''
+
+        CustomButton:
+            text: "Confirmar"
+            on_release:
+                root.add_task(nome_value.text, peso_value.text)
+
+        CustomButton:
+            text: "< Voltar"
+            background_color: 1, 1, 0, 0.5
+            on_release:
+                root.manager.transition.direction = 'right'
+                root.parent.current = "add_record_menu"
 
 <RemoveRecordMenu>
     name: "remove_record_menu"
@@ -147,14 +225,16 @@ Main:
         spacing: 5
 
         CustomButton:
-            text: "Remover Pessoa"
+            text: "Remover Pessoa *"
             on_release:
-                root.remove_person()
-        
+                root.manager.transition.direction = 'left'
+                root.parent.current = "remove_person_menu"
+
         CustomButton:
-            text: "Remover Tarefa"
+            text: "Remover Tarefa *"
             on_release:
-                root.remove_task()
+                root.manager.transition.direction = 'left'
+                root.parent.current = "remove_task_menu"
 
         CustomButton:
             text: "< Voltar"
@@ -162,6 +242,66 @@ Main:
             on_release:
                 root.manager.transition.direction = 'right'
                 root.parent.current = "regs_menu"
+
+<RemovePersonMenu>
+    name: "remove_person_menu"
+
+    GridLayout:
+        cols: 1
+        size_hint: None, 1
+        width: 300
+        padding: 10
+        spacing: 5
+
+        CustomLabel2:
+            text: 'Informe o ID da pessoa:'
+            halign: 'right'
+            
+        CustomTextInput:
+            id: Id_value  # A id não pode ser uma string
+            text:''
+
+        CustomButton:
+            text: "Confirmar"
+            on_release:
+                root.remove_person(Id_value.text)
+
+        CustomButton:
+            text: "< Voltar"
+            background_color: 1, 1, 0, 0.5
+            on_release:
+                root.manager.transition.direction = 'right'
+                root.parent.current = "remove_record_menu"
+
+<RemoveTaskMenu>
+    name: "remove_task_menu"
+
+    GridLayout:
+        cols: 1
+        size_hint: None, 1
+        width: 300
+        padding: 10
+        spacing: 5
+
+        CustomLabel2:
+            text: 'Informe o ID da tarefa:'
+            halign: 'right'
+            
+        CustomTextInput:
+            id: Id_value  # A id não pode ser uma string
+            text:''
+
+        CustomButton:
+            text: "Confirmar"
+            on_release:
+                root.remove_task(Id_value.text)
+
+        CustomButton:
+            text: "< Voltar"
+            background_color: 1, 1, 0, 0.5
+            on_release:
+                root.manager.transition.direction = 'right'
+                root.parent.current = "remove_record_menu"
 
 <ViewMenu>
     name: "view_menu"

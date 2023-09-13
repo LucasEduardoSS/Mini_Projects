@@ -40,21 +40,52 @@ class RecordsMenu(Screen):
 
 # Janela de Adicionar Registro
 class AddRecordMenu(Screen):
-    def add_person(self):
-        people.append({'Nome': 'Lucas', 'Cargo': 'Programação'})
-
     def add_task(self):
         tasks.append({'Nome': 'Debugar Código', 'Peso': 5})
 
 
-# Janela de Adicionar Tarefa
-class RemoveRecordMenu(Screen):
-    def remove_person(self):
-        print('Remover pessoa')
+# Janela de Adicionar Pessoa
+class AddPersonMenu(Screen):
+    id = 1
 
-    def remove_task(self):
-        print('Remvoer tarefa')
+    def add_person(self, nome, cargo):
+        people.append({'Id': self.id, 'Nome':  nome, 'Cargo': cargo})
+        self.id += 1
+        print('Pessoa adicionada com sucesso')
+
+
+# Janela de Adicionar Tarefa
+class AddTaskMenu(Screen):
+    id = 1
     
+    def add_task(self, nome, peso):
+        tasks.append({'Id': self.id, 'Nome': nome, 'Peso': peso})
+        self.id += 1
+        print('Tarefa adicionada com sucesso')
+
+
+# Janela de Remover Registro
+class RemoveRecordMenu(Screen):
+    pass
+
+
+# Janela de Remover Pessoa
+class RemovePersonMenu(Screen):
+    def remove_person(self, id):
+        for person in people:
+            if str(person["Id"]) == id:
+                people.remove(person)
+                print('Pessoa removida com sucesso')
+
+
+# Janela de Remover Tarefa
+class RemoveTaskMenu(Screen):
+    def remove_task(self, id):
+        for task in tasks:
+            if str(task["Id"]) == id:
+                tasks.remove(task)
+                print('Tarefa removida com sucesso')
+
 
 # Gerenciador de Janelas
 class MenuScreenManager(ScreenManager):

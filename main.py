@@ -19,7 +19,7 @@ class MenuAddPerson(Widget):
 
 
 class Main(RelativeLayout):
-    pass    
+    pass
         
 
 class TaskDividerApp(App):
