@@ -4,11 +4,9 @@ from data import *
 
 # Janela principal
 class MainMenu(Screen):
-    def on_press_records(self):
-        pass
-
     def divideTasks(self):
         pass
+
 
 # Janela de Visualização
 class ViewMenu(Screen):
@@ -34,14 +32,12 @@ class ViewMenu(Screen):
 
 # Janela de Registros
 class RecordsMenu(Screen):
-    def add_record(self):
-        pass
+    pass
 
 
 # Janela de Adicionar Registro
 class AddRecordMenu(Screen):
-    def add_task(self):
-        tasks.append({'Nome': 'Debugar Código', 'Peso': 5})
+    pass
 
 
 # Janela de Adicionar Pessoa
@@ -85,6 +81,51 @@ class RemoveTaskMenu(Screen):
             if str(task["Id"]) == id:
                 tasks.remove(task)
                 print('Tarefa removida com sucesso')
+
+
+# Janela de Alterar Registros
+class AlterRecordMenu(Screen):
+    pass
+
+
+# Janela de Alterar Pessoa
+class AlterPersonMenu(Screen):
+    def alter_person(self, id, nome='nome', cargo='cargo'):
+        for person in people:
+            if str(person['Id']) == id:
+                if nome != 'nome' and cargo != 'peso':
+                    person['Nome'] = nome
+                    person['Cargo'] = cargo
+                    print('Nome e cargo alterados com sucesso')
+
+                else:
+                    if nome != 'nome':
+                        person['Nome'] = nome
+                        print('Nome alterado com sucesso')
+                    
+                    if cargo != 'peso':
+                        person['Peso'] = cargo
+                        print('Cargo alterado com sucesso')
+                
+
+# Janela de Alterar Tarefa
+class AlterTaskMenu(Screen):
+    def alter_task(self, id, nome='nome', peso='peso'):
+        for task in tasks:
+            if str(task['id']) == id:
+                if nome != 'nome' and peso != 'peso':
+                    task['Nome'] = nome
+                    task['Peso'] = peso
+                    print('Nome e peso alterados com sucesso')
+                
+                else:
+                    if nome != 'nome':
+                        task['Nome'] = nome
+                        print('Nome alterado com sucesso')
+                    
+                    if peso != 'peso':
+                        task['Peso'] = peso
+                        print('Peso alterado com sucesso')
 
 
 # Gerenciador de Janelas

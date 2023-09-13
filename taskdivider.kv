@@ -14,6 +14,9 @@ Main:
         RemoveRecordMenu:
         RemovePersonMenu:
         RemoveTaskMenu:
+        AlterRecordMenu:
+        AlterPersonMenu:
+        AlterTaskMenu:
         ViewMenu:
 
     GridLayout:
@@ -58,7 +61,8 @@ Main:
         CustomButton:
             id: btn_encerrar
             text: "Encerrar"
-            background_color: 1, 0, 0, .7
+            color: 1, 1, 1, .8
+            background_color: .95, .27, .27, .95
             on_release:
                 app.stop()
 
@@ -92,7 +96,10 @@ Main:
                 root.parent.current = "view_menu"
 
         CustomButton:
-            text: "Alterar *"
+            text: "Alterar"
+            on_release:
+                root.manager.transition.direction = 'left'
+                root.parent.current = 'alter_record_menu'
 
         CustomButton:
             text: "Adicionar"
@@ -101,7 +108,7 @@ Main:
                 root.parent.current = "add_record_menu"
         
         CustomButton:
-            text: "Remover *"
+            text: "Remover"
             on_release:
                 root.manager.transition.direction = 'left'
                 root.parent.current = "remove_record_menu"
@@ -151,20 +158,14 @@ Main:
         width: 300
         padding: 10
         spacing: 5
-
-        CustomLabel2:
-            text: 'Nome'
         
         CustomTextInput:
             id: nome_value  # A id não pode ser uma string
-            text:''
-
-        CustomLabel2:
-            text: 'Cargo'
+            text:'Nome'
         
         CustomTextInput:
             id: cargo_value  # A id não pode ser uma string
-            text:''
+            text:'Cargo'
 
         CustomButton:
             text: "Confirmar"
@@ -187,20 +188,14 @@ Main:
         width: 300
         padding: 10
         spacing: 5
-
-        CustomLabel2:
-            text: 'Nome'
         
         CustomTextInput:
             id: nome_value  # A id não pode ser uma string
-            text:''
-
-        CustomLabel2:
-            text: 'Peso'
+            text:'Nome'
         
         CustomTextInput:
             id: peso_value  # A id não pode ser uma string
-            text:''
+            text:'Peso'
 
         CustomButton:
             text: "Confirmar"
@@ -225,13 +220,13 @@ Main:
         spacing: 5
 
         CustomButton:
-            text: "Remover Pessoa *"
+            text: "Remover Pessoa"
             on_release:
                 root.manager.transition.direction = 'left'
                 root.parent.current = "remove_person_menu"
 
         CustomButton:
-            text: "Remover Tarefa *"
+            text: "Remover Tarefa"
             on_release:
                 root.manager.transition.direction = 'left'
                 root.parent.current = "remove_task_menu"
@@ -252,14 +247,10 @@ Main:
         width: 300
         padding: 10
         spacing: 5
-
-        CustomLabel2:
-            text: 'Informe o ID da pessoa:'
-            halign: 'right'
             
         CustomTextInput:
             id: Id_value  # A id não pode ser uma string
-            text:''
+            text:'ID'
 
         CustomButton:
             text: "Confirmar"
@@ -282,14 +273,10 @@ Main:
         width: 300
         padding: 10
         spacing: 5
-
-        CustomLabel2:
-            text: 'Informe o ID da tarefa:'
-            halign: 'right'
             
         CustomTextInput:
             id: Id_value  # A id não pode ser uma string
-            text:''
+            text:'ID'
 
         CustomButton:
             text: "Confirmar"
@@ -302,6 +289,109 @@ Main:
             on_release:
                 root.manager.transition.direction = 'right'
                 root.parent.current = "remove_record_menu"
+
+<AlterRecordMenu>
+    name: "alter_record_menu"
+
+    GridLayout:
+        cols: 1
+        size_hint: None, 1
+        width: 300
+        padding: 10
+        spacing: 5
+
+        CustomButton:
+            text: "Alterar Pessoa"
+            on_release:
+                root.manager.transition.direction = 'left'
+                root.parent.current = "alter_person_menu"
+
+        CustomButton:
+            text: "Alterar Tarefa"
+            on_release:
+                root.manager.transition.direction = 'left'
+                root.parent.current = "alter_task_menu"
+
+        CustomButton:
+            text: "< Voltar"
+            background_color: 1, 1, 0, 0.5
+            on_release:
+                root.manager.transition.direction = 'right'
+                root.parent.current = "regs_menu"
+
+<AlterPersonMenu>
+    name: "alter_person_menu"
+
+    GridLayout:
+        cols: 1
+        size_hint: None, 1
+        width: 300
+        padding: 10
+        spacing: 5
+            
+        CustomTextInput:
+            id: id_value  # A id não pode ser uma string
+            text:'ID'
+        
+        CustomTextInput:
+            id: nome_value  # A id não pode ser uma string
+            text:'Nome'
+        
+        CustomTextInput:
+            id: cargo_value  # A id não pode ser uma string
+            text:'Cargo'
+
+        CustomLabel2:
+            text: 'Preencha somente os campos que deseja alterar'
+
+        CustomButton:
+            text: "Confirmar"
+            on_release:
+                root.alter_person(id_value.text, nome_value.text, cargo_value.text)
+
+        CustomButton:
+            text: "< Voltar"
+            background_color: 1, 1, 0, 0.5
+            on_release:
+                root.manager.transition.direction = 'right'
+                root.parent.current = "alter_record_menu"
+
+<AlterTaskMenu>
+    name: "alter_task_menu"
+
+    GridLayout:
+        cols: 1
+        size_hint: None, 1
+        width: 300
+        padding: 10
+        spacing: 5
+            
+        CustomTextInput:
+            id: id_value  # A id não pode ser uma string
+            text:'ID'
+        
+        CustomTextInput:
+            id: nome_value  # A id não pode ser uma string
+            text:'Nome'
+        
+        CustomTextInput:
+            id: peso_value  # A id não pode ser uma string
+            text:'Peso'
+
+        CustomLabel2:
+            text: 'Preencha somente os campos que deseja alterar'
+
+        CustomButton:
+            text: "Confirmar"
+            on_release:
+                root.alter_task(id_value.text, nome_value.text, peso_value.text)
+
+        CustomButton:
+            text: "< Voltar"
+            background_color: 1, 1, 0, 0.5
+            on_release:
+                root.manager.transition.direction = 'right'
+                root.parent.current = "alter_record_menu"
 
 <ViewMenu>
     name: "view_menu"
