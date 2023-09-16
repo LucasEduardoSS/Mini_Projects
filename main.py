@@ -14,10 +14,6 @@ Window.minimum_width = 850
 Window.minimum_height = 500
 
 
-class MenuAddPerson(Widget):
-    pass
-
-
 class Main(RelativeLayout):
     pass
         

@@ -1,11 +1,13 @@
 from kivy.uix.screenmanager import ScreenManager, Screen
 from data import *
+from main import Main
+from functions import calc_media_pesos
 
 
 # Janela principal
-class MainMenu(Screen):
+class MainMenu(Screen, Main):
     def divideTasks(self):
-        pass
+        print(calc_media_pesos(tasks))
 
 
 # Janela de Visualização
