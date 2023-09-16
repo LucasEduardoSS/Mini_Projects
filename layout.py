@@ -1,16 +1,17 @@
 from kivy.uix.screenmanager import ScreenManager, Screen
 from data import *
 from main import Main
-from functions import calc_media_pesos
+from functions import calc_average, get_weights
 
 
-# Janela principal
+# Main Window
 class MainMenu(Screen, Main):
     def divideTasks(self):
-        print(calc_media_pesos(tasks))
+        weight_average = calc_average(get_weights(tasks))
+        distributions
 
 
-# Janela de Visualização
+# Vizualization Menu Window
 class ViewMenu(Screen):
     def view_people(self):
         for person in people:
@@ -22,114 +23,114 @@ class ViewMenu(Screen):
     
     def view_all(self):
         # Imprime as pessoas
-        print('Pessoas: ')
+        print('People: ')
         for person in people:
             print(person)
         
         # Imprime as tarefas
-        print('Tarefas: ')
+        print('Tasks: ')
         for task in tasks:
             print(task)
 
 
-# Janela de Registros
+# Records Menu Window
 class RecordsMenu(Screen):
     pass
 
 
-# Janela de Adicionar Registro
+# Add Record Menu Window
 class AddRecordMenu(Screen):
     pass
 
 
-# Janela de Adicionar Pessoa
+# Add Person Menu Window
 class AddPersonMenu(Screen):
     id = 1
 
-    def add_person(self, nome, cargo):
-        people.append({'Id': self.id, 'Nome':  nome, 'Cargo': cargo})
+    def add_person(self, name, job):
+        people.append({'Id': self.id, 'Name': name, 'Job': job})
         self.id += 1
-        print('Pessoa adicionada com sucesso')
+        print('Successfully added person record!')
 
 
-# Janela de Adicionar Tarefa
+# Add Task Menu Window
 class AddTaskMenu(Screen):
     id = 1
     
-    def add_task(self, nome, peso):
-        tasks.append({'Id': self.id, 'Nome': nome, 'Peso': peso})
+    def add_task(self, name, weight):
+        tasks.append({'Id': self.id, 'Name': name, 'Weight': int(weight)})
         self.id += 1
-        print('Tarefa adicionada com sucesso')
+        print('Successfully added task record!')
 
 
-# Janela de Remover Registro
+# Remove Records Menu Window
 class RemoveRecordMenu(Screen):
     pass
 
 
-# Janela de Remover Pessoa
+# Remove Person Menu Window
 class RemovePersonMenu(Screen):
     def remove_person(self, id):
         for person in people:
             if str(person["Id"]) == id:
                 people.remove(person)
-                print('Pessoa removida com sucesso')
+                print('Successfully removed person record!')
 
 
-# Janela de Remover Tarefa
+# Remove Task Menu Window
 class RemoveTaskMenu(Screen):
     def remove_task(self, id):
         for task in tasks:
             if str(task["Id"]) == id:
                 tasks.remove(task)
-                print('Tarefa removida com sucesso')
+                print('Successfully removed task record!')
 
 
-# Janela de Alterar Registros
+# Alter Record Menu Window
 class AlterRecordMenu(Screen):
     pass
 
 
-# Janela de Alterar Pessoa
+# Alter Person Menu Window
 class AlterPersonMenu(Screen):
-    def alter_person(self, id, nome='nome', cargo='cargo'):
+    def alter_person(self, id, name='name', job='job'):
         for person in people:
             if str(person['Id']) == id:
-                if nome != 'nome' and cargo != 'peso':
-                    person['Nome'] = nome
-                    person['Cargo'] = cargo
-                    print('Nome e cargo alterados com sucesso')
+                if name != 'name' and job != 'weight':
+                    person['Name'] = name
+                    person['Job'] = job
+                    print('Successfully altered record\'s name and job')
 
                 else:
-                    if nome != 'nome':
-                        person['Nome'] = nome
-                        print('Nome alterado com sucesso')
+                    if name != 'name':
+                        person['Name'] = name
+                        print('Successfully altered record\'s name')
                     
-                    if cargo != 'peso':
-                        person['Peso'] = cargo
-                        print('Cargo alterado com sucesso')
+                    if job != 'weight':
+                        person['Wight'] = job
+                        print('Successfully altered record\'s job')
                 
 
-# Janela de Alterar Tarefa
+# Alter Task Menu Window
 class AlterTaskMenu(Screen):
-    def alter_task(self, id, nome='nome', peso='peso'):
+    def alter_task(self, id, name='name', weight='weight'):
         for task in tasks:
             if str(task['id']) == id:
-                if nome != 'nome' and peso != 'peso':
-                    task['Nome'] = nome
-                    task['Peso'] = peso
-                    print('Nome e peso alterados com sucesso')
+                if name != 'name' and weight != 'weight':
+                    task['Name'] = name
+                    task['Weight'] = weight
+                    print('Sucessfully changed record\'s name and weight!')
                 
                 else:
-                    if nome != 'nome':
-                        task['Nome'] = nome
-                        print('Nome alterado com sucesso')
+                    if name != 'name':
+                        task['Name'] = name
+                        print('Sucessfully changed record\'s name!')
                     
-                    if peso != 'peso':
-                        task['Peso'] = peso
-                        print('Peso alterado com sucesso')
+                    if weight != 'weight':
+                        task['Weight'] = weight
+                        print('Sucessfully changed record\'s weight!')
 
 
-# Gerenciador de Janelas
+# Windows Manger
 class MenuScreenManager(ScreenManager):
     pass
