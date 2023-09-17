@@ -22,6 +22,19 @@
     font_name: 'fonts/OpenSans-Regular.ttf'
     text_size: self.size
 
+<MenuTitle@Label>
+    size_hint: 1, None
+    height: 55
+    valign: 'top'
+    color: 0, 0, 0, .8
+    font_name: 'fonts/OpenSans-BoldItalic.ttf'
+
+<BlankSpace@Label>
+    size_hint: 1, None
+    height: 30
+    background_normal: ''
+    background_color: 1, 1, 1
+
 <CustomButton@Button>
     size_hint: 1, None
     height: 50
@@ -29,6 +42,17 @@
     color: 0, 0, 0, .8
     background_color: 0.3, 0.75, 0.215, 0.75
     font_name: 'fonts/OpenSans-Bold.ttf'
+
+<BackButton@Button>
+    text: "Voltar"
+    color: 0, 0, 0, .8
+    font_name: 'fonts/OpenSans-Bold.ttf'
+
+    size_hint: 1, None
+    height: 50
+
+    background_normal: ''
+    background_color: .8, .8, .2, 0.5
 
 <CustomTextInput@TextInput>
     size_hint: 1, None

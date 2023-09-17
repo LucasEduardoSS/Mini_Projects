@@ -112,9 +112,8 @@ Main:
                 root.manager.transition.direction = 'left'
                 root.parent.current = "remove_record_menu"
 
-        CustomButton:
-            text: "< Voltar"
-            background_color: 1, 1, 0, 0.5
+        BlankSpace:
+        BackButton:
             on_release:
                 root.manager.transition.direction = 'right'
                 root.parent.current = "main_menu"
@@ -129,21 +128,23 @@ Main:
         padding: 10
         spacing: 5
 
+        MenuTitle:
+            text: 'Adicionar...'
+
         CustomButton:
-            text: "Adicionar Pessoa"
+            text: "Pessoa"
             on_release:
                 root.manager.transition.direction = 'left'
                 root.parent.current = "add_person_menu"
         
         CustomButton:
-            text: "Adicionar Tarefa"
+            text: "Tarefa"
             on_release:
                 root.manager.transition.direction = 'left'
                 root.parent.current = "add_task_menu"
 
-        CustomButton:
-            text: "< Voltar"
-            background_color: 1, 1, 0, 0.5
+        BlankSpace:
+        BackButton:
             on_release:
                 root.manager.transition.direction = 'right'
                 root.parent.current = "regs_menu"
@@ -171,9 +172,8 @@ Main:
             on_release:
                 root.add_person(nome_value.text, cargo_value.text)
 
-        CustomButton:
-            text: "< Voltar"
-            background_color: 1, 1, 0, 0.5
+        BlankSpace:
+        BackButton:
             on_release:
                 root.manager.transition.direction = 'right'
                 root.parent.current = "add_record_menu"
@@ -201,9 +201,8 @@ Main:
             on_release:
                 root.add_task(nome_value.text, peso_value.text)
 
-        CustomButton:
-            text: "< Voltar"
-            background_color: 1, 1, 0, 0.5
+        BlankSpace:
+        BackButton:
             on_release:
                 root.manager.transition.direction = 'right'
                 root.parent.current = "add_record_menu"
@@ -218,21 +217,23 @@ Main:
         padding: 10
         spacing: 5
 
+        MenuTitle:
+            text: 'Remover...'
+
         CustomButton:
-            text: "Remover Pessoa"
+            text: "Pessoa"
             on_release:
                 root.manager.transition.direction = 'left'
                 root.parent.current = "remove_person_menu"
 
         CustomButton:
-            text: "Remover Tarefa"
+            text: "Tarefa"
             on_release:
                 root.manager.transition.direction = 'left'
                 root.parent.current = "remove_task_menu"
 
-        CustomButton:
-            text: "< Voltar"
-            background_color: 1, 1, 0, 0.5
+        BlankSpace:
+        BackButton:
             on_release:
                 root.manager.transition.direction = 'right'
                 root.parent.current = "regs_menu"
@@ -256,9 +257,8 @@ Main:
             on_release:
                 root.remove_person(Id_value.text)
 
+        BlankSpace:
         CustomButton:
-            text: "< Voltar"
-            background_color: 1, 1, 0, 0.5
             on_release:
                 root.manager.transition.direction = 'right'
                 root.parent.current = "remove_record_menu"
@@ -282,9 +282,8 @@ Main:
             on_release:
                 root.remove_task(Id_value.text)
 
-        CustomButton:
-            text: "< Voltar"
-            background_color: 1, 1, 0, 0.5
+        BlankSpace:
+        BackButton:
             on_release:
                 root.manager.transition.direction = 'right'
                 root.parent.current = "remove_record_menu"
@@ -299,21 +298,23 @@ Main:
         padding: 10
         spacing: 5
 
+        MenuTitle:
+            text: 'Alterar...'
+
         CustomButton:
-            text: "Alterar Pessoa"
+            text: "Pessoa"
             on_release:
                 root.manager.transition.direction = 'left'
                 root.parent.current = "alter_person_menu"
 
         CustomButton:
-            text: "Alterar Tarefa"
+            text: "Tarefa"
             on_release:
                 root.manager.transition.direction = 'left'
                 root.parent.current = "alter_task_menu"
 
-        CustomButton:
-            text: "< Voltar"
-            background_color: 1, 1, 0, 0.5
+        BlankSpace:
+        BackButton:
             on_release:
                 root.manager.transition.direction = 'right'
                 root.parent.current = "regs_menu"
@@ -348,9 +349,8 @@ Main:
             on_release:
                 root.alter_person(id_value.text, nome_value.text, cargo_value.text)
 
-        CustomButton:
-            text: "< Voltar"
-            background_color: 1, 1, 0, 0.5
+        BlankSpace:
+        BackButton:
             on_release:
                 root.manager.transition.direction = 'right'
                 root.parent.current = "alter_record_menu"
@@ -385,9 +385,8 @@ Main:
             on_release:
                 root.alter_task(id_value.text, nome_value.text, peso_value.text)
 
-        CustomButton:
-            text: "< Voltar"
-            background_color: 1, 1, 0, 0.5
+        BlankSpace:
+        BackButton:
             on_release:
                 root.manager.transition.direction = 'right'
                 root.parent.current = "alter_record_menu"
@@ -401,6 +400,9 @@ Main:
         width: 300
         padding: 10
         spacing: 5
+
+        MenuTitle:
+            text: 'Visualizar...'
 
         CustomButton:
             text: "Pessoas"
@@ -416,10 +418,9 @@ Main:
             text: "Tudo"
             on_release:
                 root.view_all()
-
-        CustomButton:
-            text: "< Voltar"
-            background_color: 1, 1, 0, 0.5
+        
+        BlankSpace:
+        BackButton:
             on_release:
                 root.manager.transition.direction = 'right'
                 root.parent.current = "regs_menu"
