@@ -1,39 +1,36 @@
-# Retorna o modulo de um número
-def modulo(x):
-    return (x**2)**0.5
+class Person:
+    people = []
+
+    def __init__(self, name: str, sector: str, job: str):
+        
+        assert name != '', 'Give it a name'
+        assert name != '', 'Cant be sectorless'
+        assert job != '', 'Give it a job'
+
+        self.name = name
+        self.sector = sector
+        self.job = job
+
+        Person.people.append(self)
 
 
-# Valida uma entrada do tipo inteiro
-def int_input():
-    while True:
-        try:
-            var = int(input("Digite aqui:"))
-            return var
-        except ValueError:
-            print("\33[31mValor inválido, tente novamente!\33[m")
+class Task:
+    tasks = []
 
+    def __init__(self, name: str, weight: int):
+        
+        assert name != '', 'Give it a name'
+        assert weight > 0, 'Weight cant be smaller or equal to 0'
 
-# Imprime um titulo
-def titulo(mgs, tam):
-    print("-" * tam), print(f"{mgs:^{tam}}"), print("-" * tam)
+        self.name = name
+        self.weight = weight
 
+        Task.tasks.append(self)
 
-# Imprime as tabelas de registros
-def tabela_registros(tbl_pessoas: list, tbl_registros: list, tipo, subtitulo=False):
-    # Imprime a tabela de registro de pessoas
-    if tipo == "P":
-        titulo("Pessoas Registradas", 50)
-        if subtitulo:
-            print(f'{"Cód":<5}{"Nome":<45}')
-        for pos, p in enumerate(tbl_pessoas):
-            print(f'{pos:<5}{p["Nome"]:<45}')
-        print("-" * 50)
+    def __repr__(self) -> str:
+        print(f'Name: {self.name}, Weight: {self.weight}')
 
-    # Imprime a tabela de registro de tarefas
-    elif tipo == "T":
-        titulo("Tarefas Registradas", 50)
-        if subtitulo:
-            print(f'{"Cód":<5}{"Nome":<40}{"Peso":<5}')
-        for pos, t in enumerate(tbl_registros):
-            print(f'{pos:<5}{t["Nome"]:<40}{t["Peso"]:<5}')
-        print("-" * 50)
+    @classmethod
+    def show_tasks(self):
+        for task in Task.tasks:
+            task.__repr__()
