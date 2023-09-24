@@ -164,13 +164,17 @@ Main:
             text:'Nome'
         
         CustomTextInput:
+            id: setor_value  # A id não pode ser uma string
+            text:'Setor'
+        
+        CustomTextInput:
             id: cargo_value  # A id não pode ser uma string
             text:'Cargo'
 
         CustomButton:
             text: "Confirmar"
             on_release:
-                root.add_person(nome_value.text, cargo_value.text)
+                root.add_person(nome_value.text, setor_value.text, cargo_value.text)
 
         BlankSpace:
         BackButton:

@@ -135,11 +135,11 @@ def calc_tasks(people: dict, tasks: list, average_weight: float, view_distru=Fal
             analyzed_tasks.clear()
             count = 0
 
-tarefas = [{'Name': 'Depurar Código', 'Weight': 5},
-           {'Name': 'Participar de Reuniao', 'Weight': 5}]
+'''tarefas = [{'Name': 'Depurar Código', 'Weight': 5},
+           {'Name': 'Participar de Reuniao', 'Weight': 6}]
 
 pessoas = [{'Name': 'Lucas', 'Tasks': []},
            {'Name': 'Saulo', 'Tasks': []}]
 
-calc_tasks(pessoas, tarefas, calc_average(get_weights(tarefas)))
-print(pessoas)
+calc_tasks(pessoas, tarefas, calc_average(get_weights(tarefas)), True)
+print(pessoas)'''

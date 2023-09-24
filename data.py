@@ -1,5 +1,6 @@
-people = []
-tasks = []
-distributions = []
+'''from classes import *
 
-num = -10
+people = Person.people
+tasks = Task.tasks
+distributions = []
+'''
