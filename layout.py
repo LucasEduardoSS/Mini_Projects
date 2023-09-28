@@ -59,7 +59,10 @@ class AddPersonMenu(Screen):
 
 # Add Task Menu Window
 class AddTaskMenu(Screen):
+
     def add_task(self, name, weight):
+        # new_weight_variance = 
+
         Task(name, int(weight))
         print('Successfully added task record!')
 

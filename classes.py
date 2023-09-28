@@ -31,10 +31,10 @@ class Person(Record):
 
 
 class Task(Record):
-    from functions import calc_average, get_weights
-
+    
     tasks = []  # Stores all instances
-    average_weight = calc_average(get_weights(tasks))
+    average_weight = 0
+    weight_variance = 0
 
     def __init__(self, name: str, weight: int):
         # Validate parameters values
@@ -48,6 +48,10 @@ class Task(Record):
         # Add instance to tasks
         Task.tasks.append(self)
         self.id = Task.tasks.index(self)
+
+        # Update class variables
+        Task.average_weight = self.calc_average_weight()
+        Task.weight_variance = self.calc_variance()
     
     # Print all instance attributes
     def __repr__(self):
@@ -57,6 +61,21 @@ class Task(Record):
     def show_tasks(self):
         for task in Task.tasks:
             task.__repr__()
+    
+    # Calculate the average weight of all tasks
+    def calc_average_weight(self):
+        from functions import calc_average
+        return calc_average([t.weight for t in Task.tasks])
+    
+    # Calculate the weight variance
+    def calc_variance(self):
+        diferencas = []
+        for t in Task.tasks:
+            diferencas.append(round(t.weight - Task.average_weight, 2))
+        return diferencas
+        # return (sum(diferencas)**2)/len(Task.tasks)
+
+        # return self.weight - Task.average_weight
 
 
 class Distru(Record):
@@ -76,13 +95,17 @@ class Distru(Record):
         self.id = Distru.distributions.index(self)
 
 
-'''
-p1 = Person('Lucas', 'IT', 'Scrum Master')
-p1.show_people()
 
-t1 = Task('Depurar Codigo', 10)
-t1.show_tasks()
+p1 = Person('Lucas', 'IT', 'Scrum Master')
+# p1.show_people()
+
+t1 = Task('Depurar Codigo', 8)
+# t1.show_tasks()
 
 t2 = Task('Agendar Sprint', 2)
-t1.show_tasks()
-'''
+# t2.show_tasks()
+
+t3 = Task('Avaliar um commit', 6)
+
+print(Task.average_weight)
+print(Task.weight_variance)

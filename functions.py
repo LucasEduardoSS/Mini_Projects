@@ -115,9 +115,9 @@ def calc_tasks(people: dict, tasks: list, average_weight: float, view_distru=Fal
                     # Assigne the smallest weight difference task
                     if temp_smallest_task_weight != 0:
 
-                        person["Tasks"].append(temp_smallest_task_weight["Nome"])
+                        person["Tasks"].append(temp_smallest_task_weight["Name"])
                         person["TTW"] += temp_smallest_task_weight["Weight"]
-                        assigned_tasks.append(tarefas.index(temp_smallest_task_weight))
+                        assigned_tasks.append(tasks.index(temp_smallest_task_weight))
 
                         # Shows if the aproximation was successfull
                         if view_distru:
@@ -135,11 +135,10 @@ def calc_tasks(people: dict, tasks: list, average_weight: float, view_distru=Fal
             analyzed_tasks.clear()
             count = 0
 
-'''tarefas = [{'Name': 'Depurar Código', 'Weight': 5},
-           {'Name': 'Participar de Reuniao', 'Weight': 6}]
+tarefas = [{'Name': 'Depurar Código', 'Weight': 5},
+           {'Name': 'Participar de Reuniao', 'Weight': 10}]
 
 pessoas = [{'Name': 'Lucas', 'Tasks': []},
            {'Name': 'Saulo', 'Tasks': []}]
 
-calc_tasks(pessoas, tarefas, calc_average(get_weights(tarefas)), True)
-print(pessoas)'''
+# print(calc_average(get_weights(tarefas)))
