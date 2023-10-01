@@ -1,3 +1,6 @@
+from statistics import mean, pvariance, pstdev
+
+
 class Record:
     pass
 
@@ -35,6 +38,7 @@ class Task(Record):
     tasks = []  # Stores all instances
     average_weight = 0
     weight_variance = 0
+    deviation = 0
 
     def __init__(self, name: str, weight: int):
         # Validate parameters values
@@ -44,14 +48,11 @@ class Task(Record):
         # Assigne instance attributes
         self.name = name
         self.weight = weight
+        self.assigned = False
 
         # Add instance to tasks
         Task.tasks.append(self)
         self.id = Task.tasks.index(self)
-
-        # Update class variables
-        Task.average_weight = self.calc_average_weight()
-        Task.weight_variance = self.calc_variance()
     
     # Print all instance attributes
     def __repr__(self):
@@ -64,18 +65,13 @@ class Task(Record):
     
     # Calculate the average weight of all tasks
     def calc_average_weight(self):
-        from functions import calc_average
-        return calc_average([t.weight for t in Task.tasks])
+        Task.average_weight = mean([t.weight for t in Task.tasks])
+        return Task.average_weight
     
     # Calculate the weight variance
     def calc_variance(self):
-        diferencas = []
-        for t in Task.tasks:
-            diferencas.append(round(t.weight - Task.average_weight, 2))
-        return diferencas
-        # return (sum(diferencas)**2)/len(Task.tasks)
-
-        # return self.weight - Task.average_weight
+        Task.weight_variance = pvariance([task.weight for task in Task.tasks], Task.average_weight)
+        return Task.weight_variance
 
 
 class Distru(Record):
@@ -107,5 +103,4 @@ t2 = Task('Agendar Sprint', 2)
 
 t3 = Task('Avaliar um commit', 6)
 
-print(Task.average_weight)
-print(Task.weight_variance)
+print(t3.calc_variance())

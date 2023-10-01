@@ -1,18 +1,3 @@
-def calc_average(_list: list):
-    """Return the average of a list."""
-
-    if len(_list) > 0:
-        # List comprehension systas: newlist = [expression for item in iterable if condition == True]
-        return sum([item for item in _list], 0)/len(_list)
-
-    else:
-        return 'Lista vazia'
-    
-def get_weights(_tasks: list):
-    """Return a list with all weights from tasks"""
-
-    return [task['Weight'] for task in _tasks]
-
 def calc_tasks(people: dict, tasks: list, average_weight: float, view_distru=False):
     """Analyze and assigne tasks for each person fairly."""
 
