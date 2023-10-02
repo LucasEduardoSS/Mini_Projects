@@ -36,9 +36,10 @@ class Person(Record):
 class Task(Record):
     
     tasks = []  # Stores all instances
-    average_weight = 0
+    weights = []  # Stores all weights
+    weight_average = 0
     weight_variance = 0
-    deviation = 0
+    weight_deviation = 0
 
     def __init__(self, name: str, weight: int):
         # Validate parameters values
@@ -53,7 +54,12 @@ class Task(Record):
         # Add instance to tasks
         Task.tasks.append(self)
         self.id = Task.tasks.index(self)
-    
+
+        # Update class attributes
+        Task.weight_average = mean(self.get_weights())
+        Task.weight_variance = pvariance(self.get_weights(), Task.weight_average)
+        Task.weight_deviation = pstdev(self.get_weights())
+        
     # Print all instance attributes
     def __repr__(self):
         print(f'Id: {self.id}, Name: {self.name}, Weight: {self.weight}')
@@ -62,17 +68,11 @@ class Task(Record):
     def show_tasks(self):
         for task in Task.tasks:
             task.__repr__()
-    
-    # Calculate the average weight of all tasks
-    def calc_average_weight(self):
-        Task.average_weight = mean([t.weight for t in Task.tasks])
-        return Task.average_weight
-    
-    # Calculate the weight variance
-    def calc_variance(self):
-        Task.weight_variance = pvariance([task.weight for task in Task.tasks], Task.average_weight)
-        return Task.weight_variance
 
+    # Get all weights
+    def get_weights(self):
+        return [task.weight for task in Task.tasks]
+        
 
 class Distru(Record):
     distributions = []  # Stores all distributions
@@ -91,8 +91,7 @@ class Distru(Record):
         self.id = Distru.distributions.index(self)
 
 
-
-p1 = Person('Lucas', 'IT', 'Scrum Master')
+'''p1 = Person('Lucas', 'IT', 'Scrum Master')
 # p1.show_people()
 
 t1 = Task('Depurar Codigo', 8)
@@ -103,4 +102,7 @@ t2 = Task('Agendar Sprint', 2)
 
 t3 = Task('Avaliar um commit', 6)
 
-print(t3.calc_variance())
+print(t3.weight_average)
+print(t3.weight_variance)
+print(t3.weight_deviation)
+'''
