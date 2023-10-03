@@ -11,7 +11,7 @@ class Person(Record):
     def __init__(self, name: str, sector: str, job: str):
         # Validate parameter values
         assert name != '', 'Give it a name'
-        assert name != '', 'Cant be sectorless'
+        assert sector != '', 'Cant be sectorless'
         assert job != '', 'Give it a job'
 
         # Assigne instance attributes
@@ -49,7 +49,6 @@ class Task(Record):
         # Assigne instance attributes
         self.name = name
         self.weight = weight
-        self.assigned = False
 
         # Add instance to tasks
         Task.tasks.append(self)
@@ -85,10 +84,20 @@ class Distru(Record):
         # Assigne the instance attributes
         self.person = person
         self.tasks = tasks
+        self.total_weight = [task for task in self.tasks]
 
         # Add the distru to the distributiions list
         Distru.distributions.append(self)
         self.id = Distru.distributions.index(self)
+    
+    # Print all instance attributes
+    def __repr__(self):
+        print(f'Id: {self.id}, Person: {self.person.name}, Tasks: {[task.name for task in self.tasks]}')
+    
+    # Print all instances
+    def show_distrus(self):
+        for d in Distru.distributions:
+            d.__repr__()
 
 
 '''p1 = Person('Lucas', 'IT', 'Scrum Master')

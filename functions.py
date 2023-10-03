@@ -1,129 +1,160 @@
-def calc_tasks(people: dict, tasks: list, average_weight: float, view_distru=False):
+from classes import *
+from time import sleep
+from random import choice
+
+def calc_distribution(people: list, tasks: list, view_distru=False):
     """Analyze and assigne tasks for each person fairly."""
 
-    from time import sleep
-    from random import randint
+    analyzed_tasks = []  # Stores the analyzed tasks
+    analyzed_people = []  # Stores the analyzed people
+    assigned_tasks = []  # Stores the assigned tasks
+    selected_tasks = []  # Stores the selected tasks for the distru assign
 
-    analyzed_tasks = [] 
-    assigned_tasks = []
-    count = temp_smallest_task_weight = 0
+    average_weight = Task.weight_average
     
-    for person in people:
-            ''' Primarily, the algorithm select and assign tasks, until the
-            assigned weight achives a value about the average. Then, if possible,
-            searchs for a task with a weight which can aproximate even more the
-            assigned weight. '''
+    for i in range(len(people)):
+        ''' Primarily, the algorithm select and assign tasks, until the
+        assigned weight achives a value about the average. Then, if possible,
+        searchs for a task with a weight which can aproximate even more the
+        assigned weight. '''
 
-            # Create an person element for storing the TOTAL TASKS WEIGHT
-            person["TTW"] = 0
+        # Selects randomly a person
+        current_person = choice(people)
 
-            while len(analyzed_tasks) < (len(tasks) - len(assigned_tasks)):
-                # Stores an index for a random task
-                task_index = randint(0, len(tasks) - 1)
+        # Verifies if the current person is available
+        while current_person in analyzed_people:
+            current_person = choice(people)
 
-                # Avoid selecting a already selected task
-                while task_index in analyzed_tasks or task_index in assigned_tasks:
-                    if view_distru:
-                        print(f'Alterando tarefa {tasks[task_index]["Name"]} ', end="")
-                        
-                    task_index = randint(0, len(tasks) - 1)
+        # Shows the person being analyzed
+        if view_distru:
+            print('Analyzing person:', current_person.name), sleep(2)
 
-                    if view_distru:
-                        print(f'para {tasks[task_index]["Name"]}...'), sleep(3)
+        # Stores the current person total tasks weight
+        TTW = 0
 
-                # Temporary task
-                temp_task = tasks[task_index].copy()
+        # Select and assign tasks until reaches the average weight
+        while len(analyzed_tasks) < (len(tasks) - len(assigned_tasks)):
+            # Randomly selects a task
+            current_task = choice(tasks)
 
-                # Shows that the task can be analyzed
-                if view_distru:  
-                    print(f'Analisando tarefa {temp_task["Name"]}...'), sleep(3)
+            # Avoid selecting an already selected task
+            while current_task in analyzed_tasks or current_task in assigned_tasks:
 
-                # Assigne a task if the total weight keeps below the avarege
-                if (person["TTW"] + temp_task["Weight"]) <= average_weight:
-                    person["Tasks"].append(temp_task["Name"])
-                    person["TTW"] += temp_task["Weight"]
-                    assigned_tasks.append(task_index)
+                if view_distru:  # Shows what task is being changed
+                    print(f'Changing task: {current_task.name} ', end=""), sleep(2)
+                
+                # Randomly selects a task
+                current_task = choice(tasks)
 
-                    # Shows the task was assgined
-                    if view_distru:
-                        print(f'Tarefa {temp_task["Name"]} atribuida a {person["Name"]}.')
-                        sleep(3)
+                if view_distru:  # Shows the changed to task
+                    print(f'to {current_task.name}...'), sleep(2)
 
-                # Analyze the tasks and tries a aproximation from up
-                else:
-                    # Module of the difference between the person's total tasks weight and the average weight
-                    diff = ((average_weight - person["TTW"])**2)**0.5
-                    
-                    # Shows it passed the fisrt test
-                    if view_distru:
-                        print("test 1 - Total tasks weight higher then the average: Passed")
-                        sleep(2)
+            if view_distru:  # Shows the task being analyzed 
+                print(f'Analyzing task: \"{current_task.name}\"...'), sleep(2)
 
-                    # Analyze the tasks
-                    for pos, task in enumerate(tasks):
-                        if pos not in assigned_tasks:
-                            
-                            # Shows it passed the second test
-                            if view_distru:  
-                                print("Test 2 - The task isn't already assigned: Passed")
-                                sleep(2)
-                            
-                            # First analyzed task
-                            if count == 0:
-                                # Shows it passed the third test
-                                if view_distru:  
-                                    print("Test 3 - Empty analized tasks list: Passed"), sleep(2)
+            # Assigne a task if the total weight keeps below the avarege
+            if (TTW + current_task.weight) <= average_weight:
+                selected_tasks.append(current_task)
+                assigned_tasks.append(current_task)
+                analyzed_tasks.append(current_task)
+                TTW += current_task.weight
 
-                                # Smaller difference
-                                smallest_diff = (person["TTW"] + task["Weight"]) - average_weight
-                                count += 1
-                            
-                            # Verifies the other tasks
-                            else:
-                                # Stores the current task weight difference
-                                current_task_diff = person["TTW"] + task["Weight"] - average_weight
-
-                                # Verifies if the weight diff is smaller the than smallest
-                                if current_task_diff < smallest_diff:
-                                    
-                                    # Shows is passed the forth test
-                                    if view_distru:  
-                                        print("Test 4 - Task analyzed with smaller difference: Passed")
-                                        sleep(2)
-                                    
-                                    # New smallest difference
-                                    smallest_diff = (person["TTW"] + task["Weight"]) - average_weight
-
-                                    # Temporary smallest task weight storing variable
-                                    temp_smallest_task_weight = task.copy()
-
-                    # Assigne the smallest weight difference task
-                    if temp_smallest_task_weight != 0:
-
-                        person["Tasks"].append(temp_smallest_task_weight["Name"])
-                        person["TTW"] += temp_smallest_task_weight["Weight"]
-                        assigned_tasks.append(tasks.index(temp_smallest_task_weight))
-
-                        # Shows if the aproximation was successfull
-                        if view_distru:
-                            print("test 5 - Weight aproximation: Passed")
-                            sleep(2)
-
-                temp_task.clear()
-                analyzed_tasks.append(task_index)
-
-                # Shows the analyzed tasks
+                # Shows the task was assgined
                 if view_distru:
-                    print("Tarefas Analisadas:", analyzed_tasks)
-                    sleep(3)
+                    print(f'Task \"{current_task.name}\" assigned to {current_person.name}.'), sleep(2)
+                
+                print('Fisrt aproximation complete!'), sleep(2)
 
-            analyzed_tasks.clear()
-            count = 0
+            else:
+                ''' This is an important section, it searches for a task that can
+                aproximate the current person total tasks weight to the average,
+                verifying each unassigned task.'''
 
-tarefas = [{'Name': 'Depurar Código', 'Weight': 5},
-           {'Name': 'Participar de Reuniao', 'Weight': 10}]
+                print('Begining second aproximation...'), sleep(2)
 
-pessoas = [{'Name': 'Lucas', 'Tasks': []},
-           {'Name': 'Saulo', 'Tasks': []}]
+                # Stores the best task
+                best_task = None
 
-# print(calc_average(get_weights(tarefas)))
+                # Analyze the tasks
+                for task in tasks:
+
+                    # Verifies if the task was already assigned
+                    if task not in assigned_tasks:
+
+                        # Add the current task to the analyzed tasks
+                        analyzed_tasks.append(task)
+                        
+                        # Shows it passed the second test
+                        if view_distru:  
+                            print("Test 2 - The task isn't already assigned: Passed"), sleep(2)
+                        
+                        # First analyzed task
+                        if best_task == None:
+                            # Shows it passed the third test: first task
+                            if view_distru:  
+                                print("Test 3 - Empty analized tasks list: Passed"), sleep(2)
+
+                            # Smallest difference
+                            smallest_diff = (TTW + task.weight) - average_weight
+                            best_task = task
+                        
+                        # Verifies the other tasks
+                        else:
+                            # Stores the current other task weight difference
+                            current_task_diff = TTW + task.weight - average_weight
+
+                            # Verifies if other task weight fits better
+                            if current_task_diff < smallest_diff:
+                                
+                                # Shows that another task fits better
+                                if view_distru:  
+                                    print("Test 4 - Task analyzed with smaller difference: Passed"), sleep(2)
+                                
+                                # New smallest difference
+                                smallest_diff = (TTW + task.weight) - average_weight
+
+                                # New best task
+                                best_task = task
+
+                # Assigne the best task after all being analyzed
+                if best_task != None:
+
+                    selected_tasks.append(best_task)
+                    assigned_tasks.append(best_task)
+                    TTW += best_task.weight
+
+                    # Shows if the aproximation was successfull
+                    if view_distru:
+                        print("Second Aproximation complete!"), sleep(2)
+
+            # Shows the analyzed tasks
+            if view_distru:
+                print("Tasks analyzed:", [task.name for task in analyzed_tasks]), sleep(2)
+
+        # Creates the distribuition
+        d1 = Distru(current_person, selected_tasks.copy())
+
+        # Prepare the variables for a new iteration
+        analyzed_people.append(current_person)
+        analyzed_tasks.clear()
+        selected_tasks.clear()
+        TTW = 0
+
+    print('Complete distribuition'), sleep(2)
+
+    # Show the distributions
+    # if view_distru:
+    d1.show_distrus()
+
+
+p1 = Person('Lucas', 'IT', 'Developer')
+p2 = Person('Romali', 'TI', 'Developer')
+p3 = Person('Saulo', 'TI', 'Developer')
+
+t1 = Task('Create a user interface', 5) 
+t2 = Task('Debug Code', 7)
+t3 = Task('Review a pull request', 3)
+t4 = Task('Create a comple algorthm', 10)
+t5 = Task('Update readme doc', 5)
+
+calc_distribution(Person.people, Task.tasks, True)

@@ -1,5 +1,4 @@
 from kivy.uix.screenmanager import ScreenManager, Screen
-from data import *
 from main import Main
 from functions import *
 from classes import *
@@ -8,7 +7,7 @@ from classes import *
 # Main Window
 class MainMenu(Screen, Main):
     def divideTasks(self):
-        weight_average = calc_average(get_weights(Task.tasks))
+        weight_average = Task.weight_average
         # distributions
 
 
