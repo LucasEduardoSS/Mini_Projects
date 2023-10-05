@@ -36,7 +36,6 @@ class Person(Record):
 class Task(Record):
     
     tasks = []  # Stores all instances
-    weights = []  # Stores all weights
     weight_average = 0
     weight_variance = 0
     weight_deviation = 0
@@ -84,7 +83,7 @@ class Distru(Record):
         # Assigne the instance attributes
         self.person = person
         self.tasks = tasks
-        self.total_weight = [task for task in self.tasks]
+        self.total_weight = sum([task.weight for task in self.tasks])
 
         # Add the distru to the distributiions list
         Distru.distributions.append(self)
@@ -92,7 +91,7 @@ class Distru(Record):
     
     # Print all instance attributes
     def __repr__(self):
-        print(f'Id: {self.id}, Person: {self.person.name}, Tasks: {[task.name for task in self.tasks]}')
+        print(f'Id: {self.id}, Person: {self.person.name}, Tasks: {[task.name for task in self.tasks]}, TTW: {self.total_weight}')
     
     # Print all instances
     def show_distrus(self):
