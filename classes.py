@@ -78,7 +78,6 @@ class Distru(Record):
     def __init__(self, person: Person, tasks: list):
         # Validate instance arguments
         assert person != None, f'The distru needs a person.'
-        assert tasks != list, f'The distru tasks should be a list.'
 
         # Assigne the instance attributes
         self.person = person
@@ -97,6 +96,10 @@ class Distru(Record):
     def show_distrus(self):
         for d in Distru.distributions:
             d.__repr__()
+
+    # Calculate the weight variance of a single distribution
+    def calc_distru_weight_variance(self):
+        return pvariance([distru.total_weight for distru in Distru.distributions])
 
 
 '''p1 = Person('Lucas', 'IT', 'Scrum Master')
