@@ -14,6 +14,7 @@ def normal_distribution(people: list, tasks: list, view_distru=False):
     selected_tasks = []  # Stores the selected tasks for the distru assign
 
     average_weight = sum(tasks[0].get_weights())/len(people)
+    print(f'average weight: {average_weight}')
     
     for i in range(len(people)):
         '''  '''
