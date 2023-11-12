@@ -30,19 +30,17 @@ def normal_distribution(people: list, tasks: list, view_distru=False):
             print('Analyzing person:', current_person.name), sleep(sleep_time)
 
         ttw = 0  # total task weight
-        aproximation = ((ttw - average_weight)**2)**0.5
-
-        if view_distru:
-            print('Begining aproximation...'), sleep(sleep_time)
+        best_aproximation = ((ttw - average_weight)**2)**0.5
 
         while True:
 
-            # Stores the best task
             best_task = None
+            
+            if view_distru:
+                print('Begining aproximation...'), sleep(sleep_time)
 
             # Analyze the tasks
             for task in tasks:
-
                 # Verifies if the task was already assigned
                 if task not in assigned_tasks:
 
@@ -56,33 +54,32 @@ def normal_distribution(people: list, tasks: list, view_distru=False):
                     current_task_aprox = ((ttw + task.weight - average_weight)**2)**0.5
 
                     # Verifies if other task weight fits better
-                    if current_task_aprox <= aproximation:
+                    if current_task_aprox <= best_aproximation:
 
                         # New best task
                         best_task = task
+                        best_aproximation = current_task_aprox
 
                         if view_distru:  
-                            print(f"Test 4 - New best task: {task.name}"), sleep(sleep_time)
+                            print(f"New best task: {task.name}"), sleep(sleep_time)
 
             # Assigne the best task after all being analyzed
-            if current_task_aprox < aproximation:
-
-                selected_tasks.append(best_task)
+            if best_task != None:
                 assigned_tasks.append(best_task)
+                selected_tasks.append(best_task)
                 ttw += best_task.weight
 
+                # Show that a task was assigned
                 if view_distru:
-                    print(f'{current_person.name} total weight: {ttw}'), sleep(sleep_time)
-                    print("Aproximation complete!"), sleep(sleep_time)
-                
-                # New smallest difference
-                aproximation = current_task_aprox
-            
-            # Breaks when can't aproximate more
-            else:
-                break
+                    print(f'Task {best_task.name} assigned to {current_person.name}.'), sleep(sleep_time)
 
-            analyzed_tasks.clear()
+            if view_distru:
+                print(f'{current_person.name} total weight: {ttw}'), sleep(sleep_time)
+                print("Aproximation complete!"), sleep(sleep_time)
+
+            # Breaks when can't aproximate more
+            if best_task == None:
+                break
 
         if view_distru:
             print("Tasks analyzed:", [task.name for task in analyzed_tasks]), sleep(sleep_time)
@@ -92,6 +89,7 @@ def normal_distribution(people: list, tasks: list, view_distru=False):
 
         # Prepare the variables for a new iteration
         analyzed_people.append(current_person)
+        analyzed_tasks.clear()
         selected_tasks.clear()
 
     if view_distru:
@@ -164,10 +162,10 @@ p1 = Person('Lucas', 'IT', 'Developer')
 p2 = Person('Romali', 'TI', 'Developer')
 p3 = Person('Saulo', 'TI', 'Developer')
 
-t1 = Task('Create a user interface', 5) 
+t1 = Task('Create a user interface', 5)
 t2 = Task('Debug Code', 7)
 t3 = Task('Review a pull request', 3)
-t4 = Task('Create a comple algorthm', 10)
+t4 = Task('Create a complex algorthm', 10)
 t5 = Task('Update readme doc', 5)
 # t6 = Task('Clean the floor', 5)
 
