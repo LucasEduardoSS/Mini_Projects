@@ -23,18 +23,7 @@ Main:
 
         ViewMenu:
 
-
-    GridLayout:
-        cols: 1
-        pos: 300, 0
-
-        CustomLabel:
-            opacity: 0
-            text: 'As divisões aparecerão aqui'
-            color: 0, 0, 0
-            background_color: 0, 1, 0, .2
-            size_hint: None, 1
-            width: root.width - 300
+    DistruWindow:
 
 <MainMenu>:
     name: "main_menu"
@@ -430,3 +419,22 @@ Main:
             on_release:
                 root.manager.transition.direction = 'right'
                 root.parent.current = "regs_menu"
+
+<DistruWindow>:
+    GridLayout:
+        id: container
+        cols: 1
+        pos: 300, 0
+        width: self.width - 300
+        
+        Label:
+            text: 'As divisões apareceram aqui.'
+            background_normal: ''
+            background_color: 0, 1, 0, 0.2
+            color: 0, 0, 0
+
+<DistributionBox>:
+    height: 50
+    width: 100
+    size_hint: None, None
+    background_color: 0, 0, 0

@@ -158,17 +158,17 @@ def average_distribuition_variance(people: list, tasks: list, distru_method):
     
     print('Total average variance:', sum/rep)
 
+# TESTING DATA - TASKS FOR 10 AVERAGE WEIGHT AND 3 PEOPLE
 p1 = Person('Lucas', 'IT', 'Developer')
 p2 = Person('Romali', 'TI', 'Developer')
 p3 = Person('Saulo', 'TI', 'Developer')
-
 t1 = Task('Create a user interface', 5)
 t2 = Task('Debug Code', 7)
 t3 = Task('Review a pull request', 3)
 t4 = Task('Create a complex algorthm', 10)
 t5 = Task('Update readme doc', 5)
-# t6 = Task('Clean the floor', 5)
 
-normal_distribution(Person.people, Task.tasks, True)
+
+# normal_distribution(Person.people, Task.tasks)
 # random_distribution(Person.people, Task.tasks)
 # average_distribuition_variance(Person.people, Task.tasks, 1)

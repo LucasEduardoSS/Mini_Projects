@@ -1,15 +1,27 @@
 from kivy.uix.screenmanager import ScreenManager, Screen
+from kivy.uix.boxlayout import BoxLayout
 from main import Main
 from functions import *
 from classes import *
 
 
-# Main Window
-class MainMenu(Screen, Main):
-    def divideTasks(self):
-        weight_average = Task.weight_average
-        # distributions
+class DistributionBox(BoxLayout):
+    pass
 
+
+
+class DistruWindow(Screen):
+    def add_distru_box(self):
+        distru_box = DistributionBox()
+        self.ids.container.add_widget(distru_box)
+
+
+
+# Main Window
+class MainMenu(DistruWindow):
+
+    def divideTasks(self):
+        DistruWindow.add_distru_box(self)
 
 # Vizualization Menu Window
 class ViewMenu(Screen):
