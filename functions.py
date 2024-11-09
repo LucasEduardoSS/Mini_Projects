@@ -5,7 +5,7 @@ from statistics import pvariance
 
 sleep_time = 1
 
-def normal_distribution(people: list, tasks: list, view_distru=False):
+def standard_distribution(people: list, tasks: list, view_distru=False):
     """Analyze and assigne tasks for each person fairly."""
 
     analyzed_tasks = []  # Stores the analyzed tasks
@@ -152,7 +152,7 @@ def average_distribuition_variance(people: list, tasks: list, distru_method):
     # sums the variances for each distribution iteration
     elif distru_method == 1:
         for i in range(1, rep):
-            iter_variance = normal_distribution(people, tasks)
+            iter_variance = standard_distribution(people, tasks)
             print(f'{i}° iteration variance: {iter_variance}')
             sum += iter_variance
     
