@@ -30,14 +30,14 @@ def standard_distribution(people: list, tasks: list, view_distru=False):
             print('Analyzing person:', current_person.name), sleep(sleep_time)
 
         ttw = 0  # total task weight
-        best_aproximation = ((ttw - average_weight)**2)**0.5
+        best_approximation = ((ttw - average_weight) ** 2) ** 0.5
 
         while True:
 
             best_task = None
             
             if view_distru:
-                print('Begining aproximation...'), sleep(sleep_time)
+                print('Beginning approximation...'), sleep(sleep_time)
 
             # Analyze the tasks
             for task in tasks:
@@ -50,20 +50,20 @@ def standard_distribution(people: list, tasks: list, view_distru=False):
                     if view_distru:  
                         print(f"Analyzing task: {task.name}"), sleep(sleep_time)
 
-                    # Stores the current task weight aproximation
+                    # Stores the current task weight approximation
                     current_task_aprox = ((ttw + task.weight - average_weight)**2)**0.5
 
                     # Verifies if other task weight fits better
-                    if current_task_aprox <= best_aproximation:
+                    if current_task_aprox <= best_approximation:
 
                         # New best task
                         best_task = task
-                        best_aproximation = current_task_aprox
+                        best_approximation = current_task_aprox
 
                         if view_distru:  
                             print(f"New best task: {task.name}"), sleep(sleep_time)
 
-            # Assigne the best task after all being analyzed
+            # Assign the best task after all being analyzed
             if best_task != None:
                 assigned_tasks.append(best_task)
                 selected_tasks.append(best_task)
@@ -169,6 +169,6 @@ t4 = Task('Create a complex algorthm', 10)
 t5 = Task('Update readme doc', 5)
 
 
-# normal_distribution(Person.people, Task.tasks)
+standard_distribution(Person.people, Task.tasks, view_distru=True)
 # random_distribution(Person.people, Task.tasks)
 # average_distribuition_variance(Person.people, Task.tasks, 1)
